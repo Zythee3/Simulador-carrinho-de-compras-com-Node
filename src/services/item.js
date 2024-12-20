@@ -1,8 +1,11 @@
 // CASO DE USO DOS ITENS
 
 //  Criar item
-export function createItem(name, price, quantity) {
+
+
+export function createItem(index, name, price, quantity) {
     return {
+        index,
         name, 
         price,
         quantity,

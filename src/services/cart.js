@@ -16,7 +16,8 @@ async function deleteItem(userCart, index) {
     
     if (indexUpdate >= 0 && index<= userCart.length){
         
-        userCart.splice(index, 1);
+        // serve para remover o item o array
+        userCart.splice(indexUpdate, 1);
     }
 }
 
@@ -28,8 +29,13 @@ async function removeItem(userCart, index) {
     if (indexUpdate >= 0 && index<= userCart.length){
         
         userCart.forEach((item, index) => {
+
             if (index == indexUpdate){
                 item.quantity -= 1;
+                
+                if (item.quantity == 0){
+                    deleteItem(userCart, item.index);
+                }
                 item.subTotal = calculateSubTotal(item.price, item.quantity)
                 
             }
@@ -49,7 +55,7 @@ async function calculateValue(userCart) {
 async function displayCart(userCart) {
     console.log("==============================================================\n🛒 Carrinho de compras\n==============================================================");
     userCart.forEach((item, index) =>{
-        console.log(`${index + 1}. ${item.name}  ${item.quantity}  ${item.price} = ${item.subTotal}`);
+        console.log(`${item.index}. ${item.name}  ${item.quantity}  ${item.price} = ${item.subTotal}`);
     })
 }
 
