@@ -41,8 +41,25 @@ async function removeItem(userCart, index) {
             }
         })
     }
-    
 }
+
+// Adiciona uma nova quantidade a unidade do item
+async function addQuantityItem(userCart, index, quantity) {
+    const indexUpdate = index - 1;
+    
+    if (indexUpdate >= 0 && index<= userCart.length){
+        
+        userCart.forEach((item, index) => {
+
+            if (index == indexUpdate){
+                item.quantity += quantity;
+                item.subTotal = calculateSubTotal(item.price, item.quantity)
+                
+            }
+        })
+    }
+}
+
 
 // Cacular o total do carrinho
 async function calculateValue(userCart) {
@@ -64,5 +81,6 @@ export{
     deleteItem,
     removeItem,
     calculateValue,
-    displayCart
+    displayCart,
+    addQuantityItem
 }
